@@ -18,23 +18,49 @@ import random
 
 #separate lists for each function
 destinations = ['Tokyo', 'New York', 'Los Angeles', 'London', 'Singapore', 'Toronto', 'Istanbul', 'Mumbai', 'Cairo', 'Beijing', 'Las Vegas', 'Shanghai', 'Hong Kong', 'San Francisco', 'Seoul', 'Dubai', 'Saint Petersburg', 'Moscow', 'Rome', 'Madrid', 'Buenos Aires', 'Amersterdam', 'Manila', 'Chicago', 'Miami', 'Mexico City', 'Paris', 'Sydney', 'Lagos', 'Jakarta', 'San Diego', 'Orlando']
+transportation_options = ['airplane', 'rental car', 'train', 'Uber', 'shuttle', 'Lyft', 'subway', 'walk', 'bus', 'ferry', 'trolleybus', 'taxi']
 
 #function for random destination
 def random_destination(dest_list):
+    confirmed_location = '' #for final summary
     random_city = random.choice(dest_list)
     location = False
-    confirmed_location = '' #for final summary
-    dest_input = input(f'Welcome to the Day Trip Generator. Unsure about your next trip. Let us plan it for you. We have selected "{random_city}"! Does this sound good? ("Yes" or "No"): ')
+    dest_input = input(f'Welcome to the Day Trip Generator. Unsure about your next trip. Let us plan it for you. We have selected "{random_city}" as a destination! Does this sound good? ("Yes" or "No"): ')
 
     while location is False:
         if dest_input == 'Yes' or dest_input == 'yes' or dest_input == 'Y' or dest_input == 'y':
             location = True
-            confirmed_location = random_city #for final summary
+            confirmed_location = random_city 
             print("That location is perfect. Let's move on to transportation.")
         elif dest_input == 'No' or dest_input == 'no' or dest_input == 'N' or dest_input == 'n':
             dest_list.remove(random_city)
             random_city = random.choice(dest_list) 
             dest_input = input(f'Not your preferred destination. Not a concern. Let us try something else. How about "{random_city}"? Enter "Yes" or "No": ')
-    return confirmed_location  #for final summary  
+        else:
+            dest_input = input(f'Please enter in a correct response (e.g. "Yes" or "No") for "{random_city}": ')
+    return confirmed_location  
+
+#function for random transportation
+def random_transportation(trans_list):
+    confirmed_transportation = '' 
+    random_trans = random.choice(trans_list)
+    transpo = False
+   
+    trans_input = input(f'We have selected "{random_trans}" for your transportation. Does this sound good? ("Yes" or "No"): ')
+
+    while transpo is False:
+        if trans_input == 'Yes' or trans_input == 'yes' or trans_input == 'Y' or trans_input == 'y':
+            transpo = True
+            confirmed_transportation = random_trans 
+            print("Safe Travels. Let's move on to selecting the restaurant.")
+        elif trans_input == 'No' or trans_input == 'no' or trans_input == 'N' or trans_input == 'n':
+            trans_list.remove(random_trans)
+            random_trans = random.choice(trans_list) 
+            trans_input = input(f'Not ideal. Let us try another option. How about "{random_trans}"? Enter "Yes" or "No": ')
+        else:
+            trans_input = input(f'Please enter in a correct response (e.g. "Yes" or "No") for "{random_trans}": ')
+    return confirmed_transportation   
+
 
 random_destination(destinations)
+random_transportation(transportation_options)
