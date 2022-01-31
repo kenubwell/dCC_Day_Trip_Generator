@@ -16,12 +16,11 @@
 
 import random
 
-#separate lists for each function
+#separate global lists for each function
 destinations = ['Tokyo', 'New York', 'Los Angeles', 'London', 'Singapore', 'Toronto', 'Istanbul', 'Mumbai', 'Cairo', 'Beijing', 'Las Vegas', 'Shanghai', 'Hong Kong', 'San Francisco', 'Seoul', 'Dubai', 'Saint Petersburg', 'Moscow', 'Rome', 'Madrid', 'Buenos Aires', 'Amersterdam', 'Manila', 'Chicago', 'Miami', 'Mexico City', 'Paris', 'Sydney', 'Lagos', 'Jakarta', 'San Diego', 'Orlando']
-transportation_options = ['airplane', 'rental car', 'train', 'Uber', 'shuttle', 'Lyft', 'subway', 'walk', 'bus', 'ferry', 'trolleybus', 'taxi']
 restaurants = ['CAVA', 'Chipotle', 'P.F. Changs', 'Chick-fil-A', 'Asean Bistro', 'UNO Pizzeria & Grill', 'Outback Steakhouse', 'Yama Sushi', 'Boro Kabob', 'The Oceanaire Seafood Room', 'Bonefish Grill', 'Boru Ramen', 'True Food Kitchen', 'A Casa do Porco', 'Narisawa', 'Pizza Hut', 'Pho La Cay', 'Mali Thai Restaurant', 'Quintonil', 'Benu', 'Twins Garden', 'The BBQ Crew', 'The Clove Club', 'Burnt Ends', 'QDOBA', 'Atelier Crenn', 'McDonalds', 'Bonchon', 'Mission BBQ', 'First Watch', 'Taco Cabana']
+transportation_options = ['airplane', 'rental car', 'train', 'Uber', 'shuttle', 'Lyft', 'subway', 'walk', 'bus', 'ferry', 'trolleybus', 'taxi']
 entertainment_options = ['Light Show', 'Opera', 'Movie Theater', 'Museum', 'Amusement Park', 'City Tour', 'Shopping Mall', 'Sporting Event', 'Air Show', 'Comedy Show', 'Park', 'Tech Expo']
-
 
 #function for random destination
 def random_destination(dest_list):
@@ -104,8 +103,36 @@ def random_entertainment(ent_list):
             ent_input = input(f'Please enter in a correct response (e.g. "Yes" or "No") for "{random_ent}": ')
     return confirmed_ent  
 
-#calling each random function
-random_destination(destinations)
-random_transportation(transportation_options)
-random_restaurant(restaurants)
-random_entertainment(entertainment_options)
+
+#function to execute, summarize, and confirm trip item selections
+def summary_confirmation():
+    conf_dest = random_destination(destinations)
+    conf_trans = random_transportation(transportation_options)
+    conf_rest = random_restaurant(restaurants)
+    conf_ent = random_entertainment(entertainment_options)
+    confirmation = False
+    confirm_input = input(f'''Congrats! We have completed generating your day trip. Let's summarize and confirm the details.
+    The trip that we generated for you includes:
+    Destination: {conf_dest}
+    Transportation: {conf_trans}
+    Restaurant: {conf_rest}
+    Entertainment: {conf_ent}
+    Would you like to finalize this trip? Enter "Yes" or "No": ''')
+
+    while confirmation is False:
+        if confirm_input == 'Yes' or confirm_input == 'yes' or confirm_input == 'Y' or confirm_input == 'y':
+            confirmation = True
+            print(f"Prepare for your dream Day Trip! You'll be arriving in {conf_dest} by {conf_trans}, where you will spend the day at a {conf_ent}. You will end the evening dining at {conf_rest}. Enjoy your day!")
+        elif confirm_input == 'No' or confirm_input == 'no' or confirm_input == 'N' or confirm_input == 'n':    
+            print("No issues. Let's quickly go over each section again.")
+            summary_confirmation()
+            break
+        else:
+            continue
+                    
+#calling the summary function for final confirmation
+summary_confirmation()
+
+
+
+
