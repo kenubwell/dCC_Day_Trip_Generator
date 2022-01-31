@@ -19,6 +19,9 @@ import random
 #separate lists for each function
 destinations = ['Tokyo', 'New York', 'Los Angeles', 'London', 'Singapore', 'Toronto', 'Istanbul', 'Mumbai', 'Cairo', 'Beijing', 'Las Vegas', 'Shanghai', 'Hong Kong', 'San Francisco', 'Seoul', 'Dubai', 'Saint Petersburg', 'Moscow', 'Rome', 'Madrid', 'Buenos Aires', 'Amersterdam', 'Manila', 'Chicago', 'Miami', 'Mexico City', 'Paris', 'Sydney', 'Lagos', 'Jakarta', 'San Diego', 'Orlando']
 transportation_options = ['airplane', 'rental car', 'train', 'Uber', 'shuttle', 'Lyft', 'subway', 'walk', 'bus', 'ferry', 'trolleybus', 'taxi']
+restaurants = ['CAVA', 'Chipotle', 'P.F. Changs', 'Chick-fil-A', 'Asean Bistro', 'UNO Pizzeria & Grill', 'Outback Steakhouse', 'Yama Sushi', 'Boro Kabob', 'The Oceanaire Seafood Room', 'Bonefish Grill', 'Boru Ramen', 'True Food Kitchen', 'A Casa do Porco', 'Narisawa', 'Pizza Hut', 'Pho La Cay', 'Mali Thai Restaurant', 'Quintonil', 'Benu', 'Twins Garden', 'The BBQ Crew', 'The Clove Club', 'Burnt Ends', 'QDOBA', 'Atelier Crenn', 'McDonalds', 'Bonchon', 'Mission BBQ', 'First Watch', 'Taco Cabana']
+entertainment_options = ['Light Show', 'Opera', 'Movie Theater', 'Museum', 'Amusement Park', 'City Tour', 'Shopping Mall', 'Sporting Event', 'Air Show', 'Comedy Show', 'Park', 'Tech Expo']
+
 
 #function for random destination
 def random_destination(dest_list):
@@ -61,6 +64,48 @@ def random_transportation(trans_list):
             trans_input = input(f'Please enter in a correct response (e.g. "Yes" or "No") for "{random_trans}": ')
     return confirmed_transportation   
 
+#function for random restaurant
+def random_restaurant(rest_list):
+    confirmed_restaurant = ''
+    random_eatery = random.choice(rest_list)
+    restaurant = False
+    rest_input = input(f'We have selected "{random_eatery}" for your restaurant. Does this sound good? ("Yes" or "No"): ')
 
+    while restaurant is False:
+        if rest_input == 'Yes' or rest_input == 'yes' or rest_input == 'Y' or rest_input == 'y':
+            restaurant = True
+            confirmed_restaurant = random_eatery 
+            print("That restaurant has great reviews. Let's move on to entertainment.")
+        elif rest_input == 'No' or rest_input == 'no' or rest_input == 'N' or rest_input == 'n':
+            rest_list.remove(random_eatery)
+            random_eatery = random.choice(rest_list) 
+            rest_input = input(f'Not the one. Let us try somewhere else to eat. How about "{random_eatery}"? Enter "Yes" or "No": ')
+        else:
+            rest_input = input(f'Please enter in a correct response (e.g. "Yes" or "No") for "{random_eatery}": ')
+    return confirmed_restaurant  
+
+#function for random entertainment
+def random_entertainment(ent_list):
+    confirmed_ent = '' 
+    random_ent = random.choice(ent_list)
+    venue = False
+    ent_input = input(f'We have selected "{random_ent}" for your entertainment! Does this sound good? ("Yes" or "No"): ')
+
+    while venue is False:
+        if ent_input == 'Yes' or ent_input == 'yes' or ent_input == 'Y' or ent_input == 'y':
+            venue = True
+            confirmed_ent = random_ent 
+            print('Perfect, it should be fun. Let us move on!')
+        elif ent_input == 'No' or ent_input == 'no' or ent_input == 'N' or ent_input == 'n':
+            ent_list.remove(random_ent)
+            random_ent = random.choice(ent_list) 
+            ent_input = input(f'Not feeling that activity. How about "{random_ent}"? Enter "Yes" or "No": ')
+        else:
+            ent_input = input(f'Please enter in a correct response (e.g. "Yes" or "No") for "{random_ent}": ')
+    return confirmed_ent  
+
+#calling each random function
 random_destination(destinations)
 random_transportation(transportation_options)
+random_restaurant(restaurants)
+random_entertainment(entertainment_options)
